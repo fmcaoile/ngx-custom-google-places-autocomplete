@@ -1,7 +1,7 @@
 {
   "name": "ngx-custom-google-places-autocomplete",
   "description": "Google Place Autocomplete Wrapper that allows you to combine custom results from your server (or other sources) and apply your own TemplateRef for added flexibility",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fmcaoile/ngx-custom-google-places-autocomplete"

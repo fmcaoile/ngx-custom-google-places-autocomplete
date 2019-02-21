@@ -9,6 +9,8 @@ Google Place Autocomplete Wrapper that allows you to combine custom results from
 ## 👨🏻‍💻 Installation
 ```shell
 npm install --save ngx-custom-google-places-autocomplete
+
+npm install --save @agm/core
 ```
 
 ### Setup @NgModule
@@ -39,12 +41,16 @@ export class AppModule { }
 ### 📓️ Notes:
 Internally, this component uses Angular Material UI's matInput, mat-action-list, and mat-list-item
 
-### Import Material theme
+### Install Material UI
 [Material UI](https://material.angular.io/guide/getting-started#yarn "Material UI")
 
 ```
-// in your styles.scss
+npm install --save @angular/material @angular/cdk @angular/animations
+```
 
+### Import Material Theme
+```
+// in your styles.scss
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 ```
 
@@ -58,6 +64,8 @@ app.component.html
     let-label="label"
     let-img="img"
     let-icon="icon">
+      // Note: you'll have to import MatIconModule to your app.module.ts if you want to use this
+      // import { MatIconModule } from '@angular/material/icon';
       <mat-icon matListIcon>{{icon}}</mat-icon>
       {{ label }}
       <img [src]='img' class="campground-photo" />
