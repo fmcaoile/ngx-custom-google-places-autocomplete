@@ -53,6 +53,12 @@ npm install --save @angular/material @angular/cdk @angular/animations
 // in your styles.scss
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 ```
+### (Optional) Import googleapis fonts in your index.html
+```
+index.html
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+```
 
 ## Usage
 app.component.html
@@ -64,8 +70,10 @@ app.component.html
     let-label="label"
     let-img="img"
     let-icon="icon">
-      // Note: you'll have to import MatIconModule to your app.module.ts if you want to use this
-      // import { MatIconModule } from '@angular/material/icon';
+      <!-- 
+      Note: you'll have to import MatIconModule to your app.module.ts if you want to use this
+      import { MatIconModule } from '@angular/material/icon'; and import fonts.googleapis.com to your index.html
+      -->
       <mat-icon matListIcon>{{icon}}</mat-icon>
       {{ label }}
       <img [src]='img' class="campground-photo" />
