@@ -35,7 +35,7 @@ export class NgxCustomGooglePlacesAutoCompleteComponent {
   @HostListener('window:resize', ['$event']) 
     resizeHandler (event) {
       this.suggestionsBoundingRect = this.searchBar.getConnectedOverlayOrigin().nativeElement.getBoundingClientRect();
-      this.changeDetectorRef.markForCheck();
+      this.changeDetectorRef.detectChanges();
     }
 
   @HostListener('window:click', ['$event.target']) 
@@ -73,7 +73,7 @@ export class NgxCustomGooglePlacesAutoCompleteComponent {
 
   @Output() change = new EventEmitter<string>();
 
-  public suggestionsBoundingRect: { width: number, left: number, top: number, height: number, y: number } = { width: 0, left: 0, top: 0, height: 0, y: 0};
+  public suggestionsBoundingRect: DOMRect;
 
   public suggestionSearchTerm: string;
 
