@@ -65,6 +65,8 @@ export class NgxCustomGooglePlacesAutoCompleteComponent {
 
   @Input() placeholder: string = 'Search';
 
+  @Input() autoCompleteOpts: any = { types: ["geocode"] };
+
   @Output() googlePlaceSelect = new EventEmitter<{name: string, lat: number, lng: number}>();
 
   @Output() customPlaceSelect = new EventEmitter<any>();

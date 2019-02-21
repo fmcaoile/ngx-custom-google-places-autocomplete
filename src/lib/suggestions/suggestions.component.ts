@@ -17,10 +17,31 @@ import { List } from 'immutable';
 
 declare var google: any;
 
-export interface IGooglePrediction {
-  description: string;
+export interface ISuggestionRow {
   label: string;
-  placeID: string;
+}
+
+export interface IGooglePrediction  extends ISuggestionRow{
+  description: string;
+  place_id: string;
+}
+
+export interface IGooglePlace {
+  address_components: Array<any>;
+  formatted_address: string;
+  geometry: {
+    bounds: Object, 
+    location: {
+      lat: Function,
+      lng: Function
+    }, 
+    location_type: string, 
+    viewport: Object
+  };
+  place_id: string;
+  types: Array<string>;
+  lat: number;
+  lng: number;
 }
 
 @Component({
@@ -51,7 +72,13 @@ export class SuggestionsComponent implements OnChanges {
 
   @Input() showSuggestionsResultContainer: boolean;
 
-  @Output() googlePlaceSelect = new EventEmitter<{name: string, lat: number, lng: number}>();
+  @Input() autoCompleteOpts: any = {
+    types: ["geocode"]
+    // ,
+    // componentRestrictions: {country: "can"}
+  };
+
+  @Output() googlePlaceSelect = new EventEmitter<IGooglePlace>();
 
   @Output() customPlaceSelect = new EventEmitter<any>();
 
@@ -122,15 +149,10 @@ export class SuggestionsComponent implements OnChanges {
 
       this.mapsAPILoader.load().then(() => {
 
-        const autoCompleteOpts = {
-          types: ["geocode"],
-          componentRestrictions: {country: "can"}      
-        }
-
         // Run query and auto select the first result if there's any
         // src: https://stackoverflow.com/questions/15709193/google-map-autocomplete-select-first-entry-in-list-by-default
         const service = new google.maps.places.AutocompleteService();
-        const placePredictionsOpts = Object.assign({ input: term }, autoCompleteOpts);
+        const placePredictionsOpts = Object.assign({ input: term }, this.autoCompleteOpts);
 
         service.getPlacePredictions(placePredictionsOpts, 
           (predictions, status) => {
@@ -142,7 +164,7 @@ export class SuggestionsComponent implements OnChanges {
                 googlePlaceSuggestions = googlePlaceSuggestions.push({
                   description: prediction.description,
                   label: prediction.structured_formatting.main_text,
-                  placeID: prediction.place_id
+                  place_id: prediction.place_id
                 });
               }
 
@@ -163,7 +185,7 @@ export class SuggestionsComponent implements OnChanges {
 
   public onGoolePlaceSuggestionSelect (event: IGooglePrediction) {
     const geocoder = new google.maps.Geocoder;
-    geocoder.geocode({'placeId': event.placeID}, (results, status) => {
+    geocoder.geocode({'placeId': event.place_id}, (results, status) => {
       if (status ===  google.maps.GeocoderStatus.OK) {
         if (results[0]) {
           const place = results[0];
@@ -174,15 +196,11 @@ export class SuggestionsComponent implements OnChanges {
             // set latitude, longitude and zoom
             const lat = place.geometry.location.lat();
             const lng = place.geometry.location.lng();
+            place.lat = lat;
+            place.lng = lng;
 
-            this.googlePlaceSelect.emit({
-              name: this.searchTerm,
-              lat: lat,
-              lng: lng
-            });
-
+            this.googlePlaceSelect.emit(place);
             this.hide();
-            
           }
 
         } else {
