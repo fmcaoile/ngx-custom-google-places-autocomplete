@@ -1,0 +1,15 @@
+{
+  "name": "ngx-custom-google-places-autocomplete",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "dependencies": {
+    "@angular/animations": "^7.2.6",
+    "@angular/cdk": "^7.3.3",
+    "@angular/material": "^7.3.3",
+    "immutable": "^4.0.0-rc.12",
+    "rxjs-compat": "^6.4.0"
+  }
+}

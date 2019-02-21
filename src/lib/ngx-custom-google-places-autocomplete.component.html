@@ -1,0 +1,33 @@
+<mat-form-field 
+  style="width: 500px" 
+  [appearance]="'outline'">
+  <input
+    #searchBar
+    matInput 
+    type="search" 
+    autocomplete="off" 
+    [placeholder]="placeholder"
+    [(ngModel)]="searchTerm"
+    (keyup)="onKeyUp($event)"
+    (keyup.enter)="onEnterPress()"
+    (keyup.arrowdown)="onArrowDown()"
+    (keyup.arrowup)="onArrowUp()"
+    (click)="onSearchBarFocus()"
+    />
+</mat-form-field>
+
+<suggestions
+  [showSuggestionsResultContainer]="showSuggestionsResultContainer"
+  [searchTerm]="suggestionSearchTerm"
+  [lat]="lat"
+  [lng]="lng"
+  [customResults]="customResults"
+  [width]="suggestionsBoundingRect.width"
+  [left]="suggestionsBoundingRect.left"
+  [top]="getTopPosition()"
+  [customResultTemplate]="customResultTemplate"
+  [selectedIndex]="selectedIndex"
+  (customPlaceSelect)="onCustomPlaceSelect($event)"
+  (googlePlaceSelect)="onGooglePlaceSelect($event)"
+  >
+</suggestions>

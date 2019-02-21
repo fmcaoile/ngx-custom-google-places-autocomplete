@@ -1,0 +1,43 @@
+<div
+  class="pt-suggestions-container"
+  [hidden]="(googlePlaceSuggestions.count() == 0 && customResults.length == 0 && !isLoading) || !showSuggestionsResultContainer"
+  [ngStyle]="{ 'width': width + 'px', 'left': left + 'px', 'top': top + 'px' }"
+  >
+  
+  <div class="pt-suggestions-contents">
+    <mat-action-list>
+      <button 
+        mat-list-item
+        *ngFor="let googlePrediction of googlePlaceSuggestions; let gpIndex = index;"
+        [ngClass]="{ 'selected': gpIndex == selectedIndex }"
+        class="suggestion"
+        (click)="onGoolePlaceSuggestionSelect(googlePrediction)">
+        <mat-icon matListIcon class="suggestion-icon">location_on</mat-icon>
+        {{ googlePrediction.label }}
+      </button>
+    </mat-action-list>
+
+    <div class="google-logo" *ngIf="googlePlaceSuggestions.count() > 0">
+    </div>
+
+    <mat-action-list>
+      <button mat-list-item
+        *ngFor="let row of customResults; let rowIndex = index;"
+        [ngClass]="{ 'selected': (rowIndex + googlePlaceSuggestions.count())  == selectedIndex }"
+        class="suggestion"
+        (click)="onCustomPlaceSelect(row)">
+        <ng-template *ngTemplateOutlet="customResultTemplate ? customResultTemplate: defaultTemplate; context:row"></ng-template>
+      </button>
+    </mat-action-list>
+
+    <div *ngIf="isLoading">
+      <mat-spinner [diameter]="40" class="pt-suggestions-loader"></mat-spinner>
+    </div>
+  </div>
+</div>
+
+<ng-template 
+  #defaultTemplate
+  let-label="label">
+  {{ label }}
+</ng-template>
