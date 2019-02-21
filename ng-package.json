@@ -3,5 +3,11 @@
   "dest": "../../dist/ngx-custom-google-places-autocomplete",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "angular",
+    "immutable",
+    "rxjs-compat"
+  ]
+
 }

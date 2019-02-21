@@ -1,6 +1,23 @@
 {
   "name": "ngx-custom-google-places-autocomplete",
+  "description": "Google Place Autocomplete Wrapper that allows you to combine custom results from your server (or other sources) and apply your own TemplateRef for added flexibility",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmcaoile/ngx-custom-google-places-autocomplete"
+  },
+  "keywords": [
+    "google",
+    "places",
+    "autocomplete",
+    "search",
+    "custom",
+    "airbnb",
+    "hipcamp"
+  ],
+  "author": "Francis Marc Caoile",
+  "license": "MIT",
+  "homepage": "https://github.com/fmcaoile/ngx-custom-google-places-autocomplete#readme",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
@@ -9,7 +26,6 @@
     "@angular/animations": "^7.2.6",
     "@angular/cdk": "^7.3.3",
     "@angular/material": "^7.3.3",
-    "@types/google-maps": "^3.2.0",
     "immutable": "^4.0.0-rc.12",
     "rxjs-compat": "^6.4.0"
   }
